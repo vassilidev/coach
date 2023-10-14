@@ -6,5 +6,5 @@ return [
     'privateTraining' => 'Entrainements privés',
     'about' => 'A propos',
     'howItWork' => 'Comment ça marche',
-    'contact' => 'Contact'
+    'contact' => 'Contact',
 ];
