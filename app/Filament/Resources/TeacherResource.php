@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeacherResource\Pages;
+use App\Filament\Resources\TeacherResource\RelationManagers;
 use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,6 +24,9 @@ class TeacherResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('id')
+                    ->required()
+                    ->maxLength(26),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
@@ -66,9 +70,6 @@ class TeacherResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -79,10 +80,19 @@ class TeacherResource extends Resource
             ]);
     }
     
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\SpecialitiesRelationManager::class,
+        ];
+    }
+    
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageTeachers::route('/'),
+            'index' => Pages\ListTeachers::route('/'),
+            'create' => Pages\CreateTeacher::route('/create'),
+            'edit' => Pages\EditTeacher::route('/{record}/edit'),
         ];
     }    
     
