@@ -4,26 +4,20 @@
             <div class="col-lg-8">
                 <div class="text-center mb-10">
                     <h1 class="page-header-ui-title text-custom-darkblue mb-5 bold font-weight-bold fw-bolder mt-5 custom-title-size">
-                        Éprouvé, fiable, inégalé
+                        {{ __('front/home.stats.title') }}
                     </h1>
-                    <p class="lead">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci aperiam
-                        blanditiis commodi cupiditate dolor dolores ducimus eligendi exercitationem facilis fugiat id
-                        illo in laboriosam laborum libero magni, minus, modi natus numquam, perferendis provident veniam
-                        veritatis. Assumenda eos eveniet expedita in minima nostrum placeat quidem, quis reiciendis sint
-                        suscipit ut?
-                    </p>
+                    <p class="lead">{{ __('front/home.stats.description') }}</p>
                     <div class="container text-center mt-10">
                         <div class="row">
                             <div class="col-12 col-md border-secondary-subtle">
                                 <i class="fa-solid fa-ranking-star text-custom-darkblue achievement-icon"></i>
-                                <h3>52+ étudiants</h3>
-                                <p>Pour tous les âges et tous <br/>les niveaux de compétence</p>
+                                <h3>{{ __('front/home.stats.bloc1.title') }}</h3>
+                                <p>{{ __('front/home.stats.bloc1.description') }}</p>
                             </div>
                             <div class="col-12 col-md">
                                 <i class="fa-solid fa-globe text-custom-darkblue achievement-icon mb-2"></i>
-                                <h3>70+ séances complétés</h3>
-                                <p>Cours en ligne <br/> à distance</p>
+                                <h3>{{ __('front/home.stats.bloc2.title') }}</h3>
+                                <p>{{ __('front/home.stats.bloc2.description') }}</p>
                             </div>
                         </div>
                     </div>

@@ -2,25 +2,25 @@
     <div class="container px-5" data-aos="fade-down">
         <div>
             <h2 class="page-header-ui-title text-custom-darkblue mb-10 mt-5 bold font-weight-bold fw-bolder text-center  custom-title-size">
-                Comment ça
-                marche?</h2>
+                {{ __('front/home.howItWork.title') }}
+            </h2>
             <div class="d-flex flex-column align-items-start">
                 <ul>
                     <li class="my-2 page-header-ui-title text-custom-darkblue mb-5 bold font-weight-bold fw-bolder fs-2 dot-remover">
                         <img src="{{ asset('img/steps/1.svg') }}" alt="step-1" class="step-icon me-md-5">
-                        Selectionnez un coach
+                        {{ __('front/home.howItWork.step1') }}
                     </li>
                     <li class="my-2 page-header-ui-title text-custom-darkblue mb-5 bold font-weight-bold fw-bolder fs-2 dot-remover">
-                        <img src="{{ asset('img/steps/2.svg') }}" alt="step-1" class="step-icon  me-md-5"> Réservez une
-                        heure qui vous convient
+                        <img src="{{ asset('img/steps/2.svg') }}" alt="step-1" class="step-icon  me-md-5">
+                        {{ __('front/home.howItWork.step2') }}
                     </li>
                     <li class="my-2 page-header-ui-title text-custom-darkblue mb-5 bold font-weight-bold fw-bolder fs-2 dot-remover">
-                        <img src="{{ asset('img/steps/3.svg') }}" alt="step-1" class="step-icon  me-md-5"> S'entraîner à
-                        l'excellence
+                        <img src="{{ asset('img/steps/3.svg') }}" alt="step-1" class="step-icon  me-md-5">
+                        {{ __('front/home.howItWork.step3') }}
                     </li>
                     <li class="my-2 page-header-ui-title text-custom-darkblue mb-5 bold font-weight-bold fw-bolder fs-2 dot-remover">
-                        <img src="{{ asset('img/steps/4.svg') }}" alt="step-1" class="step-icon  me-md-5"> Plus de
-                        résultats avec COACH
+                        <img src="{{ asset('img/steps/4.svg') }}" alt="step-1" class="step-icon  me-md-5">
+                        {{ __('front/home.howItWork.step4') }}
                     </li>
                 </ul>
             </div>

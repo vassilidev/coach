@@ -3,8 +3,8 @@
         <div class="container px-5">
             <div class="row gx-5">
                 <div class="col-lg-3">
-                    <div class="footer-brand">Coach Inc</div>
-                    <div class="mb-3">Make your sports sessions easily</div>
+                    <div class="footer-brand">{{ config('app.name') }}</div>
+                    <div class="mb-3">{{ __('app.description') }}</div>
                     <div class="icon-list-social mb-5">
                         <a class="icon-list-social-link" href="#!"><i class="fab fa-instagram"></i></a>
                         <a class="icon-list-social-link" href="#!"><i class="fab fa-facebook"></i></a>
@@ -15,7 +15,7 @@
                 <div class="col-lg-9">
                     <div class="row gx-5">
                         <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                            <div class="text-uppercase-expanded text-xs mb-4">Contact</div>
+                            <div class="text-uppercase-expanded text-xs mb-4">{{ __('common.contact') }}</div>
                             <ul class="list-unstyled mb-0">
                                 <li class="mb-2"><a href="mailto:contact@coach.com">contact@coach.com</a></li>
                             </ul>
