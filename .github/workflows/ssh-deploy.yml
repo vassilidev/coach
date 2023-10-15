@@ -1,5 +1,7 @@
-name: remote ssh command
-on: [push]
+name: CD
+on:
+  push:
+    branches: [ dev ]
 jobs:
   build:
     name: Build
@@ -8,8 +10,10 @@ jobs:
       - name: Deploy laravel app on remote
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: "cd sport && sh deploy.sh"
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd sport
+            sh deploy.sh
