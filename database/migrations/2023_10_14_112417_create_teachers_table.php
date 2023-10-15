@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('teachers', static function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(User::class)->unique()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->longText('description');
             $table->timestamps();
             $table->softDeletes();
