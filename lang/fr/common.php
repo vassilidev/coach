@@ -13,4 +13,6 @@ return [
     'speciality' => 'Spécialité',
     'categories' => 'Catégories',
     'category' => 'Catégorie',
+    'user' => 'Utilisateur',
+    'users' => 'Utilisateurs',
 ];

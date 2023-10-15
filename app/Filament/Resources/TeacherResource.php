@@ -13,6 +13,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class TeacherResource extends Resource
 {
@@ -39,11 +40,17 @@ class TeacherResource extends Resource
             ->recordTitle(fn(Teacher $teacher): string => $teacher->user->name)
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->searchable(isIndividual: true),
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable()
                     ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('specialities_count')
+                    ->sortable()
+                    ->toggleable()
+                    ->counts('specialities')
+                    ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -70,6 +77,7 @@ class TeacherResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
+                ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),

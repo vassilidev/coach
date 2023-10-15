@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers\SpecialitiesRelationManager;
-use App\Filament\Resources\CategoryResource\RelationManagers\SpecialityRelationManager;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,12 +15,15 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-tag';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -58,6 +60,11 @@ class CategoryResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(isIndividual: true, isGlobal: false),
+                Tables\Columns\TextColumn::make('specialities_count')
+                    ->counts('specialities')
+                    ->badge()
+                    ->toggleable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -73,6 +80,9 @@ class CategoryResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\Filter::make('Specialities?')
+                    ->translateLabel()
+                    ->query(fn(Builder $query): Builder => $query->whereHas('specialities')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -81,6 +91,7 @@ class CategoryResource extends Resource
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
+                ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
