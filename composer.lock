@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7546531532198d671834e189b2ba9a7",
+    "content-hash": "615c227b6b2e693c5d98f79fd63b4025",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -310,6 +310,67 @@
                 }
             ],
             "time": "2023-03-12T12:17:29+00:00"
+        },
+        {
+            "name": "davidhsianturi/blade-bootstrap-icons",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidhsianturi/blade-bootstrap-icons.git",
+                "reference": "255040a0058683dd5a0fd36dfa0857a91a95137f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidhsianturi/blade-bootstrap-icons/zipball/255040a0058683dd5a0fd36dfa0857a91a95137f",
+                "reference": "255040a0058683dd5a0fd36dfa0857a91a95137f",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.0",
+                "illuminate/support": "^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Davidhsianturi\\BladeBootstrapIcons\\BladeBootstrapIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Davidhsianturi\\BladeBootstrapIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David H. Sianturi",
+                    "email": "davidhsianturi@gmail.com",
+                    "homepage": "https://davidhsianturi.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package to easily make use of Bootstrap Icons in your Laravel Blade views.",
+            "homepage": "https://github.com/davidhsianturi/blade-bootstrap-icons",
+            "keywords": [
+                "Bootstrap Icons",
+                "blade",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/davidhsianturi/blade-bootstrap-icons/issues",
+                "source": "https://github.com/davidhsianturi/blade-bootstrap-icons/tree/v1.4.0"
+            },
+            "time": "2023-03-17T14:49:47+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1028,7 +1089,7 @@
         },
         {
             "name": "filament/actions",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/actions.git",
@@ -1078,7 +1139,7 @@
         },
         {
             "name": "filament/filament",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/panels.git",
@@ -1143,16 +1204,16 @@
         },
         {
             "name": "filament/forms",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "7f0d99e683f7e58778ead2634279c0df8db18326"
+                "reference": "1559b283083a66b40cb04407ac9001a09753ed42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/7f0d99e683f7e58778ead2634279c0df8db18326",
-                "reference": "7f0d99e683f7e58778ead2634279c0df8db18326",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/1559b283083a66b40cb04407ac9001a09753ed42",
+                "reference": "1559b283083a66b40cb04407ac9001a09753ed42",
                 "shasum": ""
             },
             "require": {
@@ -1195,11 +1256,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-13T19:26:39+00:00"
+            "time": "2023-10-14T11:48:23+00:00"
         },
         {
             "name": "filament/infolists",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/infolists.git",
@@ -1250,7 +1311,7 @@
         },
         {
             "name": "filament/notifications",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -1302,16 +1363,16 @@
         },
         {
             "name": "filament/support",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "b09b5719fce6b33253358287be70928b45cb9e1a"
+                "reference": "1c3d8f738caa4090511f038c62a7f35985cef6b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/b09b5719fce6b33253358287be70928b45cb9e1a",
-                "reference": "b09b5719fce6b33253358287be70928b45cb9e1a",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/1c3d8f738caa4090511f038c62a7f35985cef6b5",
+                "reference": "1c3d8f738caa4090511f038c62a7f35985cef6b5",
                 "shasum": ""
             },
             "require": {
@@ -1355,11 +1416,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-10-13T19:27:07+00:00"
+            "time": "2023-10-14T11:48:56+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
@@ -1412,7 +1473,7 @@
         },
         {
             "name": "filament/widgets",
-            "version": "v3.0.75",
+            "version": "v3.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/widgets.git",
@@ -4396,16 +4457,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.21",
+            "version": "v0.11.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "bcb22101107f3bf770523b65630c9d547f60c540"
+                "reference": "128fa1b608be651999ed9789c95e6e2a31b5802b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/bcb22101107f3bf770523b65630c9d547f60c540",
-                "reference": "bcb22101107f3bf770523b65630c9d547f60c540",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/128fa1b608be651999ed9789c95e6e2a31b5802b",
+                "reference": "128fa1b608be651999ed9789c95e6e2a31b5802b",
                 "shasum": ""
             },
             "require": {
@@ -4434,7 +4495,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.11.x-dev"
+                    "dev-0.11": "0.11.x-dev"
                 },
                 "bamarni-bin": {
                     "bin-links": false,
@@ -4470,9 +4531,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.21"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.22"
             },
-            "time": "2023-09-17T21:15:54+00:00"
+            "time": "2023-10-14T21:56:36+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Front\HomeController;
-use App\Http\Controllers\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -10,5 +10,7 @@ Route::group([
     Route::get('/', HomeController::class)->name('home');
 });
 
-Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+Route::group(['middleware' => 'guest', 'as' => 'socialite.'], static function () {
+    Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect'])->name('redirect');
+    Route::get('/auth/callback/{provider}', [SocialiteController::class, 'callback'])->name('callback');
+});

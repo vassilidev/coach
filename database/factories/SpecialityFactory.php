@@ -18,7 +18,7 @@ class SpecialityFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->jobTitle;
+        $name = fake()->unique()->jobTitle;
 
         return [
             'name' => $name,

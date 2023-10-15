@@ -14,7 +14,7 @@ class TeacherSeeder extends Seeder
     public function run(): void
     {
         Teacher::factory()->create([
-            'user_id' => User::first()->id,
+            'user_id'     => User::first()->id,
             'description' => 'Super coach',
         ]);
 
