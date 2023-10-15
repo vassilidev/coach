@@ -1,44 +1,36 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\SpecialityResource\RelationManagers;
 
-use App\Filament\Resources\TeacherResource\Pages;
-use App\Filament\Resources\TeacherResource\RelationManagers;
 use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TeacherResource extends Resource
+class TeachersRelationManager extends RelationManager
 {
-    protected static ?string $model = Teacher::class;
+    protected static string $relationship = 'teachers';
 
-    protected static ?string $navigationIcon = 'heroicon-s-user';
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->required(),
                 Forms\Components\MarkdownEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
-            ->recordTitle(fn(Teacher $teacher): string => $teacher->user->name)
+            ->recordTitle(fn(Teacher $teacher) => $teacher->user->name)
             ->columns([
                 Tables\Columns\TextColumn::make('id')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
@@ -66,49 +58,17 @@ class TeacherResource extends Resource
                     ->relationship('user', 'name')
                     ->multiple(),
             ])
+            ->headerActions([
+                Tables\Actions\AttachAction::make()->preloadRecordSelect(),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            RelationManagers\SpecialitiesRelationManager::class,
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index'  => Pages\ListTeachers::route('/'),
-            'create' => Pages\CreateTeacher::route('/create'),
-            'edit'   => Pages\EditTeacher::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
-
-    public static function getModelLabel(): string
-    {
-        return __('common.teacher');
-    }
-
-    public static function getPluralModelLabel(): string
-    {
-        return __('common.teachers');
     }
 }

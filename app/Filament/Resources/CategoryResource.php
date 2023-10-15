@@ -3,7 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Filament\Resources\CategoryResource\RelationManagers\SpecialitiesRelationManager;
+use App\Filament\Resources\CategoryResource\RelationManagers\SpecialityRelationManager;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -20,30 +21,29 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-tag';
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->live(debounce: 500)
-                    ->required()
-                    ->maxLength(255)
-                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
-                        if (($get('slug') ?? '') !== Str::slug($old)) {
-                            return;
-                        }
+        return $form->schema([
+            Forms\Components\TextInput::make('name')
+                ->live(debounce: 500)
+                ->required()
+                ->maxLength(255)
+                ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                    if (($get('slug') ?? '') !== Str::slug($old)) {
+                        return;
+                    }
 
-                        $set('slug', Str::slug($state));
-                    }),
-                Forms\Components\TextInput::make('slug')
-                    ->live(debounce: 500)
-                    ->required()
-                    ->unique()
-                    ->maxLength(255)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-            ]);
+                    $set('slug', Str::slug($state));
+                }),
+            Forms\Components\TextInput::make('slug')
+                ->live(debounce: 500)
+                ->required()
+                ->unique()
+                ->maxLength(255)
+                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -88,19 +88,38 @@ class CategoryResource extends Resource
                 ]),
             ]);
     }
-    
+
+    public static function getRelations(): array
+    {
+        return [
+            SpecialitiesRelationManager::class
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageCategories::route('/'),
+            'index'  => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit'   => Pages\EditCategory::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('common.category');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('common.categories');
     }
 }

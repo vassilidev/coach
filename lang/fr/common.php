@@ -7,4 +7,10 @@ return [
     'about' => 'A propos',
     'howItWork' => 'Comment ça marche',
     'contact' => 'Contact',
+    'teacher' => 'Coach',
+    'teachers' => 'Coachs',
+    'specialities' => 'Spécialités',
+    'speciality' => 'Spécialité',
+    'categories' => 'Catégories',
+    'category' => 'Catégorie',
 ];

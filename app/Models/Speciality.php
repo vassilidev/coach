@@ -19,6 +19,11 @@ class Speciality extends Model
         'slug',
     ];
 
+    public function getFilamentName(): string
+    {
+        return "coucou";
+    }
+
     /**
      * @return BelongsToMany<Teacher, Speciality>
      */
