@@ -20,7 +20,7 @@ class SpecialityResource extends Resource
 {
     protected static ?string $model = Speciality::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-star';
 
     public static function form(Form $form): Form
     {
@@ -54,13 +54,14 @@ class SpecialityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable()
-                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(isIndividual: true)
                     ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->badge()
+                    ->numeric()
+                    ->sortable()
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(isIndividual: true)
                     ->toggleable(),
@@ -85,9 +86,6 @@ class SpecialityResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -98,10 +96,19 @@ class SpecialityResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\TeachersRelationManager::class
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageSpecialities::route('/'),
+            'index'  => Pages\ListSpecialities::route('/'),
+            'create' => Pages\CreateSpeciality::route('/create'),
+            'edit'   => Pages\EditSpeciality::route('/{record}/edit'),
         ];
     }
 
@@ -111,5 +118,15 @@ class SpecialityResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('common.speciality');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('common.specialities');
     }
 }
