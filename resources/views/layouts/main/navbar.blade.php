@@ -1,5 +1,5 @@
 <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark bg-dark fixed-top">
-    <div class="container-fluid px-10">
+    <div class="container-fluid px-md-10">
         <a class="navbar-brand text-primary fs-1" href="{{ route('front.home') }}">
             {{ config('app.name') }}
         </a>
