@@ -7,7 +7,7 @@ git clean -df
 git pull origin dev
 
 # Install/update composer dependencies
-composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+../composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
 # Run database migrations
 php artisan migrate --force
