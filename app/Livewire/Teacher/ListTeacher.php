@@ -27,8 +27,15 @@ class ListTeacher extends Component
     {
         $teachers = Teacher::query()
             ->with('user')
-            ->with('specialities')
-            ->get();
+            ->with('specialities');
+
+        if ($this->userSearch) {
+            $teachers->whereHas('user', function ($query) {
+                $search = "%{$this->userSearch}%";
+
+                $query->where('name', 'LIKE', $search);
+            });
+        }
 
         $categories =  Category::query()
             ->with('specialities')
@@ -36,7 +43,7 @@ class ListTeacher extends Component
             ->get();
 
         return view('livewire.teacher.list-teacher', [
-            'teachers' => $teachers,
+            'teachers' => $teachers->get(),
             'categories' => $categories
         ]);
     }

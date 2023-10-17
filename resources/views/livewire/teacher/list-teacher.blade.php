@@ -6,6 +6,7 @@
                     <h1 class="m-0">{{ __('Liste des prof') }}</h1>
                     <div>
                         <input type="text"
+                               wire:model.live="userSearch"
                                placeholder="Rechercher un professeur..."
                                class="form-control rounded-pill">
                     </div>
