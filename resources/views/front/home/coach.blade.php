@@ -1,6 +1,6 @@
 <section class="bg-light py-10" id="coach">
-    <div class="container text-center px-5 mt-5"  data-aos="fade-left">
-        <h2 class="custom-title-size">COACHS COMPONENT INC</h2>
+    <div class="container text-center px-5 mt-5" data-aos="fade-left">
+        <livewire:teacher.list-teacher/>
     </div>
     <div class="svg-border-rounded text-white">
         <!-- Rounded SVG Border-->

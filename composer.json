@@ -17,7 +17,8 @@
         "laravel/socialite": "^5.9",
         "laravel/telescope": "^4.16",
         "laravel/tinker": "^2.8",
-        "pxlrbt/filament-excel": "^2.1",
+        "livewire/livewire": "3.0",
+        "pxlrbt/filament-excel": "2.1",
         "spatie/laravel-permission": "^5.11"
     },
     "require-dev": {
