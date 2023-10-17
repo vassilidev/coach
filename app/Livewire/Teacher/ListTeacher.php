@@ -25,15 +25,10 @@ class ListTeacher extends Component
      */
     public function render(): View
     {
-        return view('livewire.teacher.list-teacher');
-
         $teachers = Teacher::query()
             ->with('user')
+            ->with('specialities')
             ->get();
-
-        /**
-         *  order by review desc 4.5/5
-         */
 
         $categories =  Category::query()
             ->with('specialities')
