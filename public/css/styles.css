@@ -21364,7 +21364,7 @@ section {
 }
 
 .teacher-section {
-    max-height: 85vh;
+    max-height: 800px;
     overflow: auto;
     scrollbar-width: auto;
     scrollbar-color: #0061F2 rgba(255, 255, 255, 0);

@@ -36,7 +36,9 @@
                                 @foreach($teacher->specialities as $speciality)
                                     <div class="text-start">
                                         <span
-                                            class="badge custom-background-badge text-custom-dark w-100 text-start">{{ $speciality->name }}</span>
+                                            class="badge custom-background-badge text-custom-dark w-100 text-start">
+                                            {{ $speciality->name }}
+                                        </span>
                                     </div>
                                 @endforeach
                             </div>
