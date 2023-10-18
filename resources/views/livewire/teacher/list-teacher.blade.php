@@ -17,7 +17,7 @@
                             <div class="col-lg-9 col-8 border-end">
                                 <div class="row">
                                     <div class="col-md-2 col-3">
-                                        <img src="{{ asset('img/teachers/Teacher-image-exemple.png') }}"
+                                        <img src="{{ $teacher->user->avatar }}"
                                                 alt="Teacher picture" class="img-fluid rounded-circle m-2">
                                     </div>
                                     <div class="col-md-10 col-9 text-start">
@@ -53,7 +53,8 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-text">
                                     <input type="checkbox"
-                                           wire:model.live="selectedCategories"
+                                           wire:model="selectedCategories"
+                                           wire:change="toggleCategorySpecialities({{ $category->id }})"
                                            id="category-{{ $category->id }}"
                                            value="{{ $category->id }}"
                                            autocomplete="off"

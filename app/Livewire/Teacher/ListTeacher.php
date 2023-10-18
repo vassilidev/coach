@@ -41,6 +41,26 @@ class ListTeacher extends Component
             ->whereHas('specialities')
             ->get();
     }
+    
+    public function toggleCategorySpecialities(mixed $categoryID): void
+    {
+        $specialities = $this->categories->find($categoryID)->specialities->pluck('id')->toArray();
+
+        // This is the new state, not the live one
+        if (!in_array($categoryID, $this->selectedCategories)) {
+            $this->selectedSpecialities = array_diff(
+                $this->selectedSpecialities,
+                $specialities,
+            );
+        } else {
+            $this->selectedSpecialities = array_unique(
+                array_merge(
+                    $this->selectedSpecialities,
+                    $specialities,
+                )
+            );
+        }
+     }
 
     /**
      * @return View
@@ -57,18 +77,6 @@ class ListTeacher extends Component
 
                 $query->where('name', 'LIKE', $search);
             });
-        }
-
-        if (!empty($this->selectedCategories)) {
-            $this->selectedSpecialities = array_unique(
-                array_merge(
-                    $this->selectedSpecialities,
-                    ...$this->categories
-                    ->find($this->selectedCategories)
-                    ->pluck('specialities.*.id')
-                    ->toArray()
-                )
-            );
         }
 
         if (!empty($this->selectedSpecialities)) {
