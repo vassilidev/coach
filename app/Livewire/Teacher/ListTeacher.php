@@ -4,6 +4,7 @@ namespace App\Livewire\Teacher;
 
 use App\Models\Category;
 use App\Models\Teacher;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -15,6 +16,11 @@ class ListTeacher extends Component
     public string $userSearch = '';
 
     /**
+     * @var Collection
+     */
+    public Collection $categories;
+
+    /**
      * @var array
      */
     public array $selectedCategories = [];
@@ -23,6 +29,19 @@ class ListTeacher extends Component
      * @var array
      */
     public array $selectedSpecialities = [];
+
+
+    /**
+     * @return Collection
+     */
+    public function mount(): Collection
+    {
+        return $this->categories = Category::query()
+            ->with('specialities')
+            ->whereHas('specialities')
+            ->get();
+    }
+
     /**
      * @return View
      */
@@ -41,25 +60,26 @@ class ListTeacher extends Component
         }
 
         if (!empty($this->selectedCategories)) {
-            $teachers->orWhereHas('specialities.category', function ($query) {
-                $query->whereIn('id', $this->selectedCategories);
-            });
+            $this->selectedSpecialities = array_unique(
+                array_merge(
+                    $this->selectedSpecialities,
+                    ...$this->categories
+                    ->find($this->selectedCategories)
+                    ->pluck('specialities.*.id')
+                    ->toArray()
+                )
+            );
         }
 
         if (!empty($this->selectedSpecialities)) {
-            $teachers->orWhereHas('specialities', function ($query) {
+            $teachers->whereHas('specialities', function ($query) {
                 $query->whereIn('id', $this->selectedSpecialities);
             });
         }
 
-        $categories = Category::query()
-            ->with('specialities')
-            ->whereHas('specialities')
-            ->get();
-
         return view('livewire.teacher.list-teacher', [
             'teachers' => $teachers->get(),
-            'categories' => $categories
+            'categories' => $this->categories
         ]);
     }
 }
