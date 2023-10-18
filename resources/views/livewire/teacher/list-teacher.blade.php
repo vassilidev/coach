@@ -63,8 +63,10 @@
                                 </div>
                                 <label class="input-group-text w-auto flex-grow-1"
                                        for="category-{{ $category->id }}">
-                                    <i class="fa-solid fa-person-skiing text-primary me-3"></i>
-                                    {{ $category->name }}
+                                    <i class="fa-solid fa-person-skiing text-primary me-3 fs-2"></i>
+                                    <span class="text-custom-darkblue fs-2">
+                                        {{ $category->name }}
+                                    </span>
                                 </label>
                             </div>
                             <div class="text-start">
