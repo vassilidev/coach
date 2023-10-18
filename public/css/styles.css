@@ -21351,13 +21351,18 @@ section {
     color: #030818 !important;
 }
 
-.bg-custom {
+.custom-background {
     background: linear-gradient(353deg, #000 0%, #08133c 35%, #000 100%);
 }
 
-.custom-background-badge{
- background: #d7defa;
+.custom-background-badge {
+ background: #0f2577eb;
 }
+
+.custom-background-button{
+    border: 1px solid  #0f2577eb !important;
+}
+
 
 .custom-shadow{
     box-shadow: 0 0.15rem 0.7rem 0 rgba(33, 40, 50, 0.15);
@@ -21370,12 +21375,12 @@ section {
     scrollbar-color: #0061F2 rgba(255, 255, 255, 0);
 }
 
-.btn-check:checked + label.custom-background-badge {
-    background: #d7defa;
-    color: #132f85;
+.btn-check:checked + label.custom-background-button {
+    background: #0f2577eb;
+    color: white;
 }
 
-.btn-check:not(:checked) + label.custom-background-badge {
+.btn-check:not(:checked) + label.custom-background-button {
     background-color: transparent;
     color: initial;
 }

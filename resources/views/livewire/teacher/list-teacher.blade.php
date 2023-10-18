@@ -36,7 +36,7 @@
                                 @foreach($teacher->specialities as $speciality)
                                     <div class="text-start">
                                         <span
-                                            class="badge custom-background-badge text-custom-dark w-100 text-start">
+                                            class="badge custom-background-badge text-white w-100 text-start">
                                             {{ $speciality->name }}
                                         </span>
                                     </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="col-lg-4 col-12 order-1 order-lg-2">
             <div class="card mb-5">
-                <div class="card-body custom-shadow">
+                <div class="card-body custom-shadow rounded">
                     @foreach($categories as $category)
                         <div class="p-2 mb-4 rounded border custom-shadow" wire:key="category-{{ $category->id }}">
                             <div class="input-group mb-3">
@@ -75,7 +75,7 @@
                                            value="{{ $speciality->id }}"
                                            autocomplete="off"
                                            class="btn-check">
-                                    <label class="btn m-1 btn-sm rounded-3 border custom-background-badge"
+                                    <label class="btn m-1 btn-sm rounded-3 border custom-background-button shadow-sm"
                                            for="speciality-{{ $speciality->id }}">
                                         {{ $speciality->name }}
                                     </label>
