@@ -12,18 +12,17 @@
             </div>
             <div class="teacher-section card-body p-2 my-4">
                 @foreach($teachers as $teacher)
-                    <div class="card my-4 p-4 custom-shadow">
+                    <div class="card my-4 p-4 custom-shadow" wire:key="teacher-{{ $teacher->id }}">
                         <div class="row">
                             <div class="col-lg-9 col-8 border-end">
                                 <div class="row">
                                     <div class="col-md-2 col-3">
-                                        <img
-                                            src="{{asset('img/teachers/Teacher-image-exemple.png')}}"
-                                            alt="Teacher picture" class="img-fluid rounded-circle m-2">
+                                        <img src="{{ asset('img/teachers/Teacher-image-exemple.png') }}"
+                                                alt="Teacher picture" class="img-fluid rounded-circle m-2">
                                     </div>
                                     <div class="col-md-10 col-9 text-start">
-                                        <h4>{{ $teacher->user->name }}</h4>
-                                        <h5>{{ __('front/home.about') }}</h5>
+                                        <h4 class="mb-4">{{ $teacher->user->name }}</h4>
+                                        <h6>{{ __('front/home.about') }}</h6>
                                         <p class="text-start">{{ $teacher->description }}</p>
                                         <button class="btn btn-primary p-2">
                                             {{ __('front/home.book') }}
@@ -34,9 +33,8 @@
                             <div class="col-lg-3 col-4">
                                 <h4>{{ __('front/home.specialities') }}</h4>
                                 @foreach($teacher->specialities as $speciality)
-                                    <div class="text-start">
-                                        <span
-                                            class="badge custom-background-badge text-white w-100 text-start">
+                                    <div class="text-start" wire:key="speciality-{{ $speciality->id }}">
+                                        <span class="badge custom-background-badge text-white w-100 text-start">
                                             {{ $speciality->name }}
                                         </span>
                                     </div>

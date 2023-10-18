@@ -4,21 +4,15 @@ namespace App\Livewire\Teacher;
 
 use App\Models\Category;
 use App\Models\Teacher;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class ListTeacher extends Component
 {
     /**
-     * @var Collection
-     */
-    private Collection $categories;
-
-    /**
      * @var string
      */
-    public $userSearch;
+    public string $userSearch = '';
 
     /**
      * @var array
