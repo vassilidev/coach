@@ -1,4 +1,4 @@
-<section class="bg-light py-10" id="coach">
+<section class="bg-light" id="coach">
     <div class="container text-center px-5 mt-5" data-aos="fade-left">
         <livewire:teacher.list-teacher/>
     </div>
