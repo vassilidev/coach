@@ -11,7 +11,7 @@ return [
     //Teachers
     'listTeacher' => 'Liste des coachs',
     'about' => 'À propos',
-    'book' => 'réserver',
+    'book' => 'Réserver',
     'specialities' => 'Spécialités',
 
     //Stats
