@@ -1,4 +1,4 @@
-<header class="page-header-ui page-header-ui-light bg-custom">
+<header class="page-header-ui page-header-ui-light custom-background">
     <div class="page-header-ui-content pt-5">
         <div class="container">
             <div class="row gx-5 align-items-center">

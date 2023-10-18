@@ -62,6 +62,10 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
+    protected $appends = [
+        'avatar',
+    ];
+
     /**
      * @return HasOne<Teacher, User>
      */
@@ -73,5 +77,10 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function getAvatarAttribute(): string
+    {
+        return 'https://api.dicebear.com/7.x/adventurer/png?seed=' . urlencode($this->name);
     }
 }

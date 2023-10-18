@@ -1,7 +1,7 @@
 <section class="bg-light py-10" id="how-it-work">
     <div class="container px-5" data-aos="fade-down">
         <div>
-            <h2 class="page-header-ui-title text-custom-darkblue mb-10 mt-5 bold font-weight-bold fw-bolder text-center  custom-title-size">
+            <h2 class="page-header-ui-title text-custom-darkblue mb-10 mt-5 bold font-weight-bold fw-bolder text-center custom-title-size">
                 {{ __('front/home.howItWork.title') }}
             </h2>
             <div class="d-flex flex-column align-items-start">

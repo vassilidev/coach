@@ -8,6 +8,12 @@ return [
     'listItem2'       => "Pour les patineurs artistiques, les joueurs de hockey et les amateurs de fitness de tous âges et de tous niveaux",
     'listItem3'       => "Disponible 24 heures sur 24, 7 jours sur 7, 365 jours par an, quel que soit votre lieu de résidence ou votre fuseau horaire.",
 
+    //Teachers
+    'listTeacher' => 'Liste des coachs',
+    'about' => 'À propos',
+    'book' => 'Réserver',
+    'specialities' => 'Spécialités',
+
     //Stats
     'stats'           => [
         'title'       => 'Éprouvé, fiable, inégalé',

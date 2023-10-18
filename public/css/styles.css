@@ -11776,7 +11776,7 @@ textarea.form-control-lg {
     --bs-bg-opacity: 1;
     background-color: #030818 !important;
 }
-toto2
+
 @media (min-width: 992px) {
     .bg-dark {
         --bs-bg-opacity: 1;
@@ -20608,8 +20608,6 @@ body {
 }
 
 
-
-
 .navbar-marketing.navbar-light.navbar-scrolled {
     background-color: #fff !important;
     border-bottom: 1px solid #f2f6fc;
@@ -21353,8 +21351,56 @@ section {
     color: #030818 !important;
 }
 
-.bg-custom {
+.custom-background {
     background: linear-gradient(353deg, #000 0%, #08133c 35%, #000 100%);
+}
+
+.custom-background-badge {
+ background: #0f2577eb;
+}
+
+.custom-background-button{
+    border: 1px solid  #0f2577eb !important;
+}
+
+
+.custom-shadow{
+    box-shadow: 0 0.15rem 0.7rem 0 rgba(33, 40, 50, 0.15);
+}
+
+.teacher-section {
+    max-height: 800px;
+    overflow: auto;
+    scrollbar-width: auto;
+    scrollbar-color: #0061F2 rgba(255, 255, 255, 0);
+}
+
+.btn-check:checked + label.custom-background-button {
+    background: #0f2577eb;
+    color: white;
+}
+
+.btn-check:not(:checked) + label.custom-background-button {
+    background-color: transparent;
+    color: initial;
+}
+
+/* ===== Scrollbar CSS ===== */
+.teacher-section::-webkit-scrollbar {
+    width: 10px;
+}
+
+.teacher-section::-webkit-scrollbar-track {
+    background: rgba(176, 172, 172, 0.78);
+    border-radius: 3px;
+    border: 3px solid #e1e6ec;
+    margin-left: 30px;
+}
+
+.teacher-section::-webkit-scrollbar-thumb {
+    background-color: #0061F2;
+    border-radius: 10px;
+    border: 3px solid rgba(176, 172, 172, 0.78);
 }
 
 @media (min-width: 576px) {
