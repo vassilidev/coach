@@ -55,7 +55,10 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-text">
                                     <input type="checkbox"
+                                           wire:model.live="selectedCategories"
                                            id="category-{{ $category->id }}"
+                                           value="{{ $category->id }}"
+                                           autocomplete="off"
                                            class="form-check-input mt-0">
                                 </div>
                                 <label class="input-group-text w-auto flex-grow-1"
@@ -67,8 +70,11 @@
                             <div class="text-start">
                                 @foreach($category->specialities as $speciality)
                                     <input type="checkbox"
-                                           class="btn-check"
-                                           id="speciality-{{ $speciality->id }}" autocomplete="off">
+                                           wire:model.live="selectedSpecialities"
+                                           id="speciality-{{ $speciality->id }}"
+                                           value="{{ $speciality->id }}"
+                                           autocomplete="off"
+                                           class="btn-check">
                                     <label class="btn m-1 btn-sm rounded-3 border custom-background-badge"
                                            for="speciality-{{ $speciality->id }}">
                                         {{ $speciality->name }}

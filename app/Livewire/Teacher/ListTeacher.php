@@ -13,13 +13,22 @@ class ListTeacher extends Component
     /**
      * @var Collection
      */
-    private $categories;
+    private Collection $categories;
 
     /**
      * @var string
      */
     public $userSearch;
 
+    /**
+     * @var array
+     */
+    public array $selectedCategories = [];
+
+    /**
+     * @var array
+     */
+    public array $selectedSpecialities = [];
     /**
      * @return View
      */
@@ -37,7 +46,19 @@ class ListTeacher extends Component
             });
         }
 
-        $categories =  Category::query()
+        if (!empty($this->selectedCategories)) {
+            $teachers->orWhereHas('specialities.category', function ($query) {
+                $query->whereIn('id', $this->selectedCategories);
+            });
+        }
+
+        if (!empty($this->selectedSpecialities)) {
+            $teachers->orWhereHas('specialities', function ($query) {
+                $query->whereIn('id', $this->selectedSpecialities);
+            });
+        }
+
+        $categories = Category::query()
             ->with('specialities')
             ->whereHas('specialities')
             ->get();
