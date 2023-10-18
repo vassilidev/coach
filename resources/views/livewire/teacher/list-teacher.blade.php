@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-8 col-12 order-2 order-lg-1">
             <div class="d-flex justify-content-between align-items-center">
-                <h1 class="m-0">{{ __('front/home.listTeacher') }}</h1>
+                <h1 class="m-0 bold font-weight-bold fw-bolder text-custom-darkblue custom-title-size">{{ __('front/home.listTeacher') }}</h1>
                 <div>
                     <input type="text"
                            wire:model.live="userSearch"
