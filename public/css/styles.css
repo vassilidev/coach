@@ -21422,3 +21422,9 @@ section {
         padding-left: 1.2em;
     }
 }
+
+@media (min-width: 1200px) {
+    .border-end-xl {
+        border-right: 1px solid #dee2e6;
+    }
+}
