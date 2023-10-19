@@ -1,5 +1,6 @@
 <section class="bg-light" id="coach">
     <div class="container text-center px-5 mt-5" data-aos="fade-left">
+        @include('messages.flash-messages')
         <livewire:teacher.list-teacher/>
     </div>
     <div class="svg-border-rounded text-white">
