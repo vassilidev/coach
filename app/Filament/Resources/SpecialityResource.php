@@ -22,7 +22,9 @@ class SpecialityResource extends Resource
     protected static ?string $model = Speciality::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-star';
+
     protected static ?int $navigationSort = 4;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
