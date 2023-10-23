@@ -19,6 +19,8 @@ class TeacherResource extends Resource
 {
     protected static ?string $model = Teacher::class;
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-s-user';
 
     public static function form(Form $form): Form
@@ -52,17 +54,17 @@ class TeacherResource extends Resource
                     ->counts('specialities')
                     ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),

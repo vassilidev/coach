@@ -21,6 +21,8 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationIcon = 'heroicon-s-tag';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -66,15 +68,15 @@ class CategoryResource extends Resource
                     ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

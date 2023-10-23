@@ -17,6 +17,8 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'bi-people-fill';
@@ -56,14 +58,14 @@ class UserResource extends Resource
                     ->default(false),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('login_provider')
@@ -73,7 +75,7 @@ class UserResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
