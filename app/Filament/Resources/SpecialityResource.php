@@ -47,7 +47,6 @@ class SpecialityResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->live(debounce: 500)
                     ->required()
-                    ->unique()
                     ->maxLength(255)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
             ]);
@@ -69,15 +68,15 @@ class SpecialityResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

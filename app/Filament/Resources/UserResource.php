@@ -56,14 +56,14 @@ class UserResource extends Resource
                     ->default(false),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('login_provider')
@@ -73,7 +73,7 @@ class UserResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

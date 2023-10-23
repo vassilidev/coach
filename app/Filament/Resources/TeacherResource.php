@@ -52,17 +52,17 @@ class TeacherResource extends Resource
                     ->counts('specialities')
                     ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y \à H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
