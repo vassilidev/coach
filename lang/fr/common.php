@@ -15,4 +15,10 @@ return [
     'category' => 'Catégorie',
     'user' => 'Utilisateur',
     'users' => 'Utilisateurs',
+    'name' => 'Nom',
+    'createdAt' => 'Crée le',
+    'deletedAt' => 'Supprimé le',
+    'updatedAt' => 'Mis à jour le',
+    'description' => 'Déscription',
+    'verifiedAt' => 'Vérifié le'
 ];

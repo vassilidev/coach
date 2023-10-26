@@ -32,10 +32,12 @@ class SpecialityResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('category_id')
+                    ->label(__('common.category'))
                     ->relationship('category', 'name')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
+                    ->label(__('common.name'))
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(255)
@@ -59,9 +61,11 @@ class SpecialityResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('common.name'))
                     ->searchable(isIndividual: true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->label(__('common.category'))
                     ->badge()
                     ->numeric()
                     ->sortable()
@@ -70,14 +74,17 @@ class SpecialityResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('common.createdAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('common.updatedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('common.deletedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

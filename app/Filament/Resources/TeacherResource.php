@@ -28,9 +28,11 @@ class TeacherResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
+                    ->label(__('common.user'))
                     ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\MarkdownEditor::make('description')
+                    ->label(__('common.description'))
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -45,25 +47,30 @@ class TeacherResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label(__('common.name'))
                     ->numeric()
                     ->sortable()
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('specialities_count')
+                    ->label(__('common.specialities'))
                     ->sortable()
                     ->toggleable()
                     ->counts('specialities')
                     ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('common.createdAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('common.updatedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('common.deletedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
