@@ -17,6 +17,8 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'bi-people-fill';
@@ -26,6 +28,7 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('common.name'))
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -45,6 +48,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('common.name'))
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(isIndividual: true)
@@ -55,15 +59,18 @@ class UserResource extends Resource
                     ->boolean()
                     ->default(false),
                 Tables\Columns\TextColumn::make('email_verified_at')
+                    ->label(__('common.verifiedAt'))
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label(__('common.createdAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label(__('common.updatedAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('login_provider')
@@ -73,7 +80,7 @@ class UserResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -116,5 +123,15 @@ class UserResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('common.user');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('common.users');
     }
 }

@@ -15,11 +15,14 @@ class SpecialitiesRelationManager extends RelationManager
 {
     protected static string $relationship = 'specialities';
 
+    protected static ?string $title = 'Spécialités';
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('common.name'))
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(255)
@@ -33,7 +36,6 @@ class SpecialitiesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('slug')
                     ->live(debounce: 500)
                     ->required()
-                    ->unique()
                     ->maxLength(255)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
             ]);
@@ -44,21 +46,25 @@ class SpecialitiesRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('common.name'))
                     ->searchable(isIndividual: true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label(__('common.createdAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label(__('common.updatedAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->label(__('common.deletedAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

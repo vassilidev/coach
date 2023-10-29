@@ -19,6 +19,8 @@ class TeacherResource extends Resource
 {
     protected static ?string $model = Teacher::class;
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-s-user';
 
     public static function form(Form $form): Form
@@ -26,9 +28,11 @@ class TeacherResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
+                    ->label(__('common.user'))
                     ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\MarkdownEditor::make('description')
+                    ->label(__('common.description'))
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -43,26 +47,31 @@ class TeacherResource extends Resource
                     ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label(__('common.name'))
                     ->numeric()
                     ->sortable()
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('specialities_count')
+                    ->label(__('common.specialities'))
                     ->sortable()
                     ->toggleable()
                     ->counts('specialities')
                     ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label(__('common.createdAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label(__('common.updatedAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->label(__('common.deletedAt'))
+                    ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
