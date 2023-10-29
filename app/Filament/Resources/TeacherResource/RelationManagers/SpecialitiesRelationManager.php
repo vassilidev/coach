@@ -16,6 +16,8 @@ class SpecialitiesRelationManager extends RelationManager
 {
     protected static string $relationship = 'specialities';
 
+    protected static ?string $title = 'Spécialités';
+
     public function form(Form $form): Form
     {
         return $form
@@ -49,7 +51,8 @@ class SpecialitiesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                ->label(__('common.name')),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

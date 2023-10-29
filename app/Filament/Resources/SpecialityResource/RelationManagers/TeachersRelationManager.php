@@ -14,11 +14,14 @@ class TeachersRelationManager extends RelationManager
 {
     protected static string $relationship = 'teachers';
 
+    protected static ?string $title = 'Coachs';
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\MarkdownEditor::make('description')
+                    ->label(__('common.description'))
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -33,20 +36,24 @@ class TeachersRelationManager extends RelationManager
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label(__('common.name'))
                     ->numeric()
                     ->sortable()
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('common.createdAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('common.updatedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('common.deletedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)

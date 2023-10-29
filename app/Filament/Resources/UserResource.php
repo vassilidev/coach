@@ -28,6 +28,7 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('common.name'))
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -47,6 +48,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('common.name'))
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(isIndividual: true)
@@ -57,14 +59,17 @@ class UserResource extends Resource
                     ->boolean()
                     ->default(false),
                 Tables\Columns\TextColumn::make('email_verified_at')
+                    ->label(__('common.verifiedAt'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime(config('datetime.format'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('common.createdAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('common.updatedAt'))
                     ->dateTime(config('datetime.format'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -118,5 +123,15 @@ class UserResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('common.user');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('common.users');
     }
 }
