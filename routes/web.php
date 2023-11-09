@@ -17,6 +17,5 @@ Route::group(['middleware' => 'guest', 'as' => 'socialite.'], static function ()
     Route::get('/auth/callback/{provider}', [SocialiteController::class, 'callback'])->name('callback');
 });
 
-Route::get('stripe/create-checkout-session',  [StripeController::class, 'createCheckoutSession'])->name('stripe.create-checkout-session');
 Route::get('stripe/success/{checkout}', ValidateStripeCheckoutController::class)->name('stripe.success');
 Route::get('stripe/cancel',  [StripeController::class, 'cancel'])->name('stripe.cancel');
