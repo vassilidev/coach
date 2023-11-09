@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "3.0",
         "pxlrbt/filament-excel": "2.1",
-        "spatie/laravel-permission": "^5.11"
+        "spatie/laravel-permission": "^5.11",
+        "stripe/stripe-php": "^13.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
@@ -32,6 +33,9 @@
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
