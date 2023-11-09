@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -57,6 +58,50 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->plugin(
+                FilamentFullCalendarPlugin::make()
+                    ->selectable()
+                    ->config([
+                        'headerToolbar' => [
+                            'left' => 'prev,next,today',
+                            'center' => 'title',
+                            'right' => 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                        ],
+                        'buttonText' => [
+                            'prev' => '<',
+                            'next' => '>',
+                            'today' => 'today',
+                            'month' => 'month',
+                            'week' => 'week',
+                            'day' => 'day',
+                            'prevYear' => 'Forrige år',
+                            'nextYear' => 'Neste år',
+                            'listMonth' => 'Agenda',
+                            'listWeek' => 'UL',
+                        ],
+                        'slotLabelFormat' => [
+                            'hour' => 'numeric',
+                            'minute' => '2-digit',
+                            'omitZeroMinute' => false,
+                            'meridiem' => 'short',
+                        ],
+                        'contentHeight' => 'auto',
+                        'dayMaxEvents' => true,
+                        'weekNumbers' => true,
+                        'weekNumberCalculation' => 'ISO',
+                        'weekNumberFormat' => ['week' => 'numeric'],
+                        'nowIndicator' => true,
+                        'droppable' => true,
+                        'displayEventEnd' => true,
+                        'slotDuration' => '00:15:00',
+                        'slotMinTime' => '08:00:00',
+                        'slotMaxTime' => '23:00:00',
+                        'navLinks' => 'true'
+
+                    ])
+                    ->plugins(['dayGrid', 'timeGrid', 'rrule', 'interaction', 'list'], true)
+                    ->editable()
+            );
     }
 }

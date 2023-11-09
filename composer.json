@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "3.0",
         "pxlrbt/filament-excel": "2.1",
+        "saade/filament-fullcalendar": "3.0",
         "spatie/laravel-permission": "^5.11",
         "stripe/stripe-php": "^13.0"
     },

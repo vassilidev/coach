@@ -108,8 +108,12 @@ class TeacherResource extends Resource
             'index'  => Pages\ListTeachers::route('/'),
             'create' => Pages\CreateTeacher::route('/create'),
             'edit'   => Pages\EditTeacher::route('/{record}/edit'),
+            'book'   => Pages\BookTeacher::route('/{record}/book'),
         ];
     }
+
+
+
 
     public static function getEloquentQuery(): Builder
     {
