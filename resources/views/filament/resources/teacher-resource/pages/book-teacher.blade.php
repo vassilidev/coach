@@ -1,3 +1,10 @@
 <x-filament-panels::page>
-    @livewire(\App\Filament\Resources\TeacherResource\Widgets\BookCalendarWidget::class)
+    @livewire(\App\Filament\Widgets\ClientBookTeacherCalendar::class)
+    <a href="{{ route('front.home') }}"
+       class="btn btn-success" style="
+           background-color: rgb(204,0,0);
+           color: white;
+           text-align: center;
+           border-radius: 8px;}"
+    >Retour</a>
 </x-filament-panels::page>

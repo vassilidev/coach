@@ -6,6 +6,7 @@ use App\Filament\Pages\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -39,6 +40,12 @@ class AdminPanelProvider extends PanelProvider
             ->passwordReset()
             ->profile()
             ->globalSearch()
+            ->userMenuItems([
+                'backToWebSite' => MenuItem::make()
+                    ->label('Retour au site')
+                    ->icon('heroicon-o-home')
+                    ->url(config('app.url'), true),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')

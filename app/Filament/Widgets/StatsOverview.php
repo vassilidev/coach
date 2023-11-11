@@ -40,4 +40,9 @@ class StatsOverview extends BaseWidget
                 ->color('danger'),
         ];
     }
+
+    public static function canView(): bool
+    {
+        return false;
+    }
 }
