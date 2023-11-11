@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Relations\BelongsTo\BelongsToUser;
+use App\Traits\Relations\MorphMany\MorphManyEvents;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,8 @@ class Teacher extends Model
     use HasFactory,
         HasUlids,
         BelongsToUser,
-        SoftDeletes;
+        SoftDeletes,
+        MorphManyEvents;
 
     protected $fillable = [
         'description',

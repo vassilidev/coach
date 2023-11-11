@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Relations\MorphMany\MorphManyEvents;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +21,8 @@ class User extends Authenticatable implements FilamentUser
         HasFactory,
         Notifiable,
         HasRoles,
-        SoftDeletes;
+        SoftDeletes,
+        MorphManyEvents;
 
     protected $with = [
         'teacherProfile'
