@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
+            $table->json('metadata');
             $table->timestamps();
         });
     }
