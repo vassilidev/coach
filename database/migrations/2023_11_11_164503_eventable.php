@@ -14,7 +14,8 @@ return new class extends Migration {
         Schema::create('eventable', static function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Event::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->morphs('ownable');
+            $table->ulid('ownable_id');
+            $table->string('ownable_type');
             $table->timestamps();
         });
 
