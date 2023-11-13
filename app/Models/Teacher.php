@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\HasEvents;
 use App\Traits\Relations\BelongsTo\BelongsToUser;
 use App\Traits\Relations\MorphMany\MorphManyEvents;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Teacher extends Model
+class Teacher extends Model implements HasEvents
 {
     use HasFactory,
         HasUlids,

@@ -11,11 +11,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('eventable', static function (Blueprint $table) {
+        Schema::create('eventables', static function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Event::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->ulid('ownable_id');
-            $table->string('ownable_type');
+            $table->foreignIdFor(Event::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->ulidMorphs('eventable');
             $table->timestamps();
         });
 
@@ -26,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('eventable');
+        Schema::dropIfExists('eventables');
     }
 };

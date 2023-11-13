@@ -4,22 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Event extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'name',
-        'starts_at',
-        'ends_at',
+        'title',
+        'start',
+        'end',
     ];
 
-    public function eventable(): MorphTo
+    public function teachers(): MorphToMany
     {
-        return $this->morphTo(
-            'eventable',
-            'ownable_type',
-            'ownable_id'
-        );
+        return $this->morphedByMany(Teacher::class, 'eventable');
     }
 }

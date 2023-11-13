@@ -73,7 +73,7 @@ class AdminPanelProvider extends PanelProvider
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
                             'center' => 'title',
-                            'right' => 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                            'right' => '',
                         ],
                         'buttonText' => [
                             'prev' => '<',
@@ -104,8 +104,8 @@ class AdminPanelProvider extends PanelProvider
                         'slotDuration' => '00:15:00',
                         'slotMinTime' => '08:00:00',
                         'slotMaxTime' => '23:00:00',
-                        'navLinks' => 'true'
-
+                        'navLinks' => 'true',
+                        'initialView' => 'timeGridWeek'
                     ])
                     ->plugins(['dayGrid', 'timeGrid', 'rrule', 'interaction', 'list'], true)
                     ->editable()

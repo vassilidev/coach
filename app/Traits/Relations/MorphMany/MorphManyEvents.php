@@ -4,14 +4,12 @@ namespace App\Traits\Relations\MorphMany;
 
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MorphManyEvents
 {
-    /**
-     * @return MorphMany
-     */
-    public function events(): MorphMany
+    public function events(): MorphToMany
     {
-        return $this->morphMany(Event::class, 'ownable');
+        return $this->morphToMany(Event::class, 'eventable');
     }
 }

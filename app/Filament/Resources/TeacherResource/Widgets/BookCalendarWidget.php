@@ -15,12 +15,12 @@ class BookCalendarWidget extends FullCalendarWidget
     public function getFormSchema(): array
     {
         return [
-            TextInput::make('name'),
+            TextInput::make('title'),
 
             Grid::make()
                 ->schema([
-                    DateTimePicker::make('starts_at'),
-                    DateTimePicker::make('ends_at'),
+                    DateTimePicker::make('start'),
+                    DateTimePicker::make('end'),
                 ]),
         ];
     }
