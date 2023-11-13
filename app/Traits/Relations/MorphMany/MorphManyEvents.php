@@ -3,7 +3,6 @@
 namespace App\Traits\Relations\MorphMany;
 
 use App\Models\Event;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MorphManyEvents
