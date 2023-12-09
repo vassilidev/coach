@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Resources\TeacherResource\Widgets\BookCalendarWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -18,6 +19,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
@@ -68,7 +72,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(
                 FilamentFullCalendarPlugin::make()
-                    ->selectable()
+                    ->selectable(!Str::endsWith(request()->url(), '/book'))
                     ->config([
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
@@ -108,7 +112,7 @@ class AdminPanelProvider extends PanelProvider
                         'initialView' => 'timeGridWeek'
                     ])
                     ->plugins(['dayGrid', 'timeGrid', 'rrule', 'interaction', 'list'], true)
-                    ->editable()
+                    ->editable(!Str::endsWith(request()->url(), '/book'))
             );
     }
 }

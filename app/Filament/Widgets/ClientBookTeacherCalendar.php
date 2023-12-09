@@ -2,50 +2,63 @@
 
 namespace App\Filament\Widgets;
 
-use App\Contracts\HasEvents;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Grid;
+use App\Models\Event;
+use Filament\Actions\CreateAction;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Illuminate\Database\Eloquent\Model;
-use Saade\FilamentFullCalendar\Actions\ViewAction;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
 class ClientBookTeacherCalendar extends FullCalendarWidget
 {
-    /**
-     * @var HasEvents|string|int|Model|null
-     */
+    public $teacher;
     public string|int|null|Model $record = null;
-
-    public function getFormSchema(): array
-    {
-        return [
-            TextInput::make('title'),
-
-            Grid::make()
-                ->schema([
-                    DateTimePicker::make('start'),
-                    DateTimePicker::make('end'),
-                ]),
-        ];
-    }
 
     public function fetchEvents(array $info): array
     {
-        return $this->record->events()
+        if (!$this->teacher) {
+            return [];
+        }
+
+        return $this->teacher->events()
             ->where('start', '>=', $info['start'])
             ->where('end', '<=', $info['end'])
             ->get()
             ->toArray();
     }
 
-    protected function viewAction(): ViewAction
+    public function onEventClick($event): void
     {
-        return ViewAction::make()->mountUsing(
-            function ($record, Form $form) {
-                $form->fill([]); // TODO: Make it work :(
-            }
-        );
+        $this->record = Event::find($event['id']);
+
+        $this->mountAction('book');
+    }
+
+    protected function book(): CreateAction
+    {
+        return CreateAction::make()
+            ->form([
+                Section::make('Récapitulatif')
+                    ->schema([
+                        // NOTE(BENJ): Recapitulatif du caoch
+                        // Recapitulatif de ses sports etc..
+                        // Recap prix (50e en dur)
+
+                        TextInput::make('title')
+                            ->default($this->record->title)
+                            ->readOnly(),
+                    ]),
+
+                Select::make('activity') // TODO Rename
+                    ->options($this->teacher->specialities()->pluck('name', 'id'))
+                    ->searchable(),
+
+                // TODO add message to the coach
+                // TODO: add any fields u judge required
+                // https://filamentphp.com/docs/3.x/actions/prebuilt-actions/create
+                // Voir les notifs
+            ])
+            ->createAnother(false);
     }
 }
