@@ -93,6 +93,12 @@ class ClientBookTeacherCalendar extends FullCalendarWidget
             ])
             ->successNotificationTitle(__('common.book.bookSucceeded'))
             ->failureNotificationTitle(__('common.book.bookFailed'))
-            ->createAnother(false);
+            ->createAnother(false)
+            ->using(function (array $attributes) {
+                //TODO: Create Reservation;
+                //TODO: Create Checkout with default config price
+                // TODO redirect to checkout
+                // TODO: valid reservation after checkout
+            });
     }
 }
