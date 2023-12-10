@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stripe_checkouts', static function (Blueprint $table) {
-            $table->ulid('id');
+            $table->ulid('id')->index();
             $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->string('checkout_id');
             /** @see PaymentStatus */

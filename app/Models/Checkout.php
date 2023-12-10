@@ -5,10 +5,14 @@ namespace App\Models;
 use App\Casts\Price;
 use App\Enums\Stripe\Checkout\PaymentStatus;
 use App\Enums\Stripe\Checkout\Status;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Checkout extends Model
 {
+    use HasUlids;
+
     protected $table = 'stripe_checkouts';
 
     protected $fillable = [
@@ -36,5 +40,12 @@ class Checkout extends Model
     public function isComplete(): bool
     {
         return $this->payment_status === Status::COMPLETE;
+    }
+
+    public function paymentUrl(): Attribute
+    {
+        // TODO : Implement refresh URL fo the Session if expire / check expire
+        
+        return Attribute::get(fn() => $this->checkout_data['url']);
     }
 }

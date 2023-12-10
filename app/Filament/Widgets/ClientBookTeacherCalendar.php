@@ -2,8 +2,11 @@
 
 namespace App\Filament\Widgets;
 
+use App\Actions\Checkout\DeleteAndExpireCheckout;
+use App\Actions\Reservation\CreateReservationFromBookingCalendar;
 use App\Models\Event;
 use App\Models\Teacher;
+use Exception;
 use Filament\Actions\CreateAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
@@ -11,6 +14,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
 class ClientBookTeacherCalendar extends FullCalendarWidget
@@ -79,26 +85,43 @@ class ClientBookTeacherCalendar extends FullCalendarWidget
                             ->readOnly()
                             ->columnSpanFull(),
                     ]),
-                Select::make('speciality')
+                Select::make('speciality_id')
                     ->label(__('common.speciality'))
                     ->placeholder(__('common.book.chooseSpeciality'))
                     ->options($this->teacher->specialities()->pluck('name', 'id'))
                     ->columnSpanFull()
                     ->required()
                     ->searchable(),
-                Textarea::make('message')
+                Textarea::make('comment')
                     ->placeholder(__('common.book.messageForCoach'))
                     ->autosize()
                     ->columnSpanFull(),
             ])
+            ->modalSubmitActionLabel(__('common.book.make'))
+            ->modalHeading(__('common.book.details'))
             ->successNotificationTitle(__('common.book.bookSucceeded'))
             ->failureNotificationTitle(__('common.book.bookFailed'))
             ->createAnother(false)
-            ->using(function (array $attributes) {
-                //TODO: Create Reservation;
-                //TODO: Create Checkout with default config price
-                // TODO redirect to checkout
-                // TODO: valid reservation after checkout
-            });
+            ->using(function ($data) {
+                DB::beginTransaction();
+
+                $reservation = app(CreateReservationFromBookingCalendar::class)->execute(Auth::user(), $this->record, $data);
+
+                try {
+                    throw_if(is_null($reservation));
+
+                    $this->record = $reservation;
+
+                    DB::commit();
+                } catch (Exception $exception) {
+                    Log::error($exception);
+
+                    app(DeleteAndExpireCheckout::class)->execute($reservation->checkout);
+
+                    DB::rollBack();
+                }
+            })
+            ->successRedirectUrl(fn() => $this->record->checkout->payment_url);
+        //TODO: Check how can we change this to be more fluid and user friendly
     }
 }

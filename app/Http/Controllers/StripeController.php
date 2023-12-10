@@ -14,16 +14,10 @@ class StripeController extends Controller
     /**
      * @return RedirectResponse
      */
-    public function success(): RedirectResponse
-    {
-        return redirect()->route('front.home')->with('success', 'Paiement réussi.');
-    }
-
-    /**
-     * @return RedirectResponse
-     */
     public function cancel(): RedirectResponse
     {
+        //TODO: Expire current session
+
         return redirect()->route('front.home')->with('danger', 'Paiement annulé.');
     }
 }
