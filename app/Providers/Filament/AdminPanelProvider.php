@@ -74,16 +74,16 @@ class AdminPanelProvider extends PanelProvider
                     ->config([
                         'headerToolbar'         => [
                             'left'   => 'prev,next,today',
-                            'center' => 'title',
-                            'right'  => '',
+                            'center' => '',
+                            'right'  => 'title',
                         ],
                         'buttonText'            => [
                             'prev'      => '<',
                             'next'      => '>',
-                            'today'     => 'today',
-                            'month'     => 'month',
-                            'week'      => 'week',
-                            'day'       => 'day',
+                            'today'     => "Aujourd'hui",
+                            'month'     => 'mois',
+                            'week'      => 'semaine',
+                            'day'       => 'jour',
                             'prevYear'  => 'Forrige år',
                             'nextYear'  => 'Neste år',
                             'listMonth' => 'Agenda',
