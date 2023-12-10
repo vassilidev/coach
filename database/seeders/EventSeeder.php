@@ -10,8 +10,6 @@ class EventSeeder extends Seeder
 {
     public function run(): void
     {
-        Event::factory(50)->create();
-
-        Event::each(static fn(Event $event) => Teacher::inRandomOrder()->first()->events()->attach($event));
+        Teacher::each(static fn(Teacher $teacher) => $teacher->events()->saveMany(Event::factory(random_int(2, 10))->make()));
     }
 }

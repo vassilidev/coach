@@ -3,8 +3,8 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Event;
+use App\Models\Teacher;
 use Filament\Actions\CreateAction;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -15,7 +15,7 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
 class ClientBookTeacherCalendar extends FullCalendarWidget
 {
-    public $teacher;
+    public ?Teacher $teacher = null;
     public string|int|null|Model $record = null;
 
     public function fetchEvents(array $info): array

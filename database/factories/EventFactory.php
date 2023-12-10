@@ -16,7 +16,7 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
-        $start = fake()->dateTimeThisMonth();
+        $start = fake()->dateTimeBetween('-7 days', '+7 days');
 
         return [
             'title' => fake()->jobTitle,
