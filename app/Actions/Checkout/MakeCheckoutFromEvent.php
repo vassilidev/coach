@@ -17,13 +17,15 @@ final class MakeCheckoutFromEvent
     {
         $price ??= (int)config('reservations.defaultPrice');
 
+        $id = Str::ulid();
+
         return (new Checkout)->forceFill([
-            'id'             => Str::ulid(),
+            'id'             => $id,
             'user_id'        => $user->id,
             'payment_status' => PaymentStatus::UNPAID,
             'status'         => Status::OPEN,
             'amount'         => $price,
-            'redirect_url'   => 'https://google.com', // TODO : Add redirect from reservation
+            'redirect_url'   => route('reservation.success', $id),
         ]);
     }
 }

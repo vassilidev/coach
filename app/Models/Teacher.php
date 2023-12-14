@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use App\Contracts\HasEvents;
 use App\Traits\Relations\BelongsTo\BelongsToUser;
-use App\Traits\Relations\MorphMany\MorphManyEvents;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Teacher extends Model implements HasEvents
+class Teacher extends Model
 {
     use HasFactory,
         HasUlids,
         BelongsToUser,
-        SoftDeletes,
-        MorphManyEvents;
+        SoftDeletes;
 
     protected $fillable = [
         'description',
@@ -29,5 +27,13 @@ class Teacher extends Model implements HasEvents
     public function specialities(): BelongsToMany
     {
         return $this->belongsToMany(Speciality::class);
+    }
+
+    /**
+     * @return HasMany<Event, Teacher>
+     */
+    public function events(): HasMany
+    {
+        return $this->hasMany(Event::class);
     }
 }

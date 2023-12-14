@@ -43,6 +43,7 @@ class TeacherCalendarWidget extends FullCalendarWidget
                     }
                 )
                 ->using(function (array $data, string $model): Model {
+                    $data = array_merge($data, ['teacher_id' => Auth::user()->teacherProfile->id]); // TODO find a cleaner way to add the teacher_id
                     return Auth::user()->teacherProfile->events()->save($model::create($data));
                 })
         ];

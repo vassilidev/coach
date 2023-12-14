@@ -46,7 +46,7 @@ final class CreateReservationFromBookingCalendar
             'start' => $event->start,
             'end' => $event->end,
             'speciality_name' => Speciality::firstWhere('id', $specialityId)->name,
-            'coach_name' => $event->teachers()->first()->user->name,
+            'coach_name' => $event->teacher->user->name,
         ];
 
         return app(CreateStripeCheckoutFromCheckoutModel::class)

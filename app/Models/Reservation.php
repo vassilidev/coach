@@ -47,4 +47,19 @@ class Reservation extends Model
     {
         return $query->status(Status::CANCELED);
     }
+
+    public function isFinished(): bool
+    {
+        return $this->status === Status::FINISHED;
+    }
+
+    public function isNew(): bool
+    {
+        return $this->status === Status::NEW;
+    }
+
+    public function isCanceled(): bool
+    {
+        return $this->status === Status::CANCELED;
+    }
 }

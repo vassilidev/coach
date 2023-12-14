@@ -8,6 +8,7 @@ use App\Enums\Stripe\Checkout\Status;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Checkout extends Model
 {
@@ -45,7 +46,15 @@ class Checkout extends Model
     public function paymentUrl(): Attribute
     {
         // TODO : Implement refresh URL fo the Session if expire / check expire
-        
+
         return Attribute::get(fn() => $this->checkout_data['url']);
+    }
+
+    /**
+     * @return HasOne<Reservation, Checkout>
+     */
+    public function reservation(): HasOne
+    {
+        return $this->hasOne(Reservation::class, 'stripe_checkout_id');
     }
 }
