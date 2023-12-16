@@ -141,4 +141,9 @@ class CategoryResource extends Resource
     {
         return __('common.categories');
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

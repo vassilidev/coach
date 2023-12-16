@@ -112,9 +112,6 @@ class TeacherResource extends Resource
         ];
     }
 
-
-
-
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -131,5 +128,10 @@ class TeacherResource extends Resource
     public static function getPluralModelLabel(): string
     {
         return __('common.teachers');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
