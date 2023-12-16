@@ -95,4 +95,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function isTeacher(): bool
+    {
+        return $this->teacherProfile()->exists();
+    }
 }
