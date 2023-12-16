@@ -13,6 +13,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -103,19 +104,23 @@ class EditProfile extends Page
                 ->aside()
                 ->description('Ensure your account is using long, random password to stay secure.')
                 ->schema([
-                    TextInput::make('Current password')
+                    TextInput::make('current_password')
                         ->password()
                         ->required()
-                        ->currentPassword(),
+                        ->label(__('common.password'))
+                        ->currentPassword()
+                        ->dehydrated(false),
                     TextInput::make('password')
+                        ->label(__('filament-panels::pages/auth/edit-profile.form.password.label'))
                         ->password()
-                        ->required()
                         ->rule(Password::default())
                         ->autocomplete('new-password')
-                        ->dehydrateStateUsing(fn($state): string => Hash::make($state))
+                        ->dehydrated(fn ($state): bool => filled($state))
+                        ->dehydrateStateUsing(fn ($state): string => Hash::make($state))
                         ->live(debounce: 500)
                         ->same('passwordConfirmation'),
                     TextInput::make('passwordConfirmation')
+                        ->label(__('filament-panels::pages/auth/edit-profile.form.password_confirmation.label'))
                         ->password()
                         ->required()
                         ->dehydrated(false),
@@ -162,9 +167,17 @@ class EditProfile extends Page
     {
         $data = $this->editPasswordForm->getState();
 
-        if (array_key_exists('password', $data) && request()->hasSession()) {
-            request()->session()->put(['password_hash_' . Filament::getAuthGuard() => $data['password']]);
+        $user = $this->getUser();
+
+        $this->handleRecordUpdate($user, $data);
+
+        if (request()->hasSession() && array_key_exists('password', $data)) {
+            request()->session()->put([
+                'password_hash_' . Filament::getAuthGuard() => $data['password'],
+            ]);
         }
+
+        Auth::login($user);
 
         $this->editPasswordForm->fill();
 
