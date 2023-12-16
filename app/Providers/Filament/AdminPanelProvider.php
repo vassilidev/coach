@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Pages\EditProfile;
 use Exception;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -38,13 +39,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->registration()
             ->passwordReset()
-            ->profile()
             ->globalSearch()
             ->userMenuItems([
                 'backToWebSite' => MenuItem::make()
                     ->label('Retour au site')
                     ->icon('heroicon-o-home')
                     ->url(config('app.url'), true),
+                'profile'       => MenuItem::make()
+                    ->label(fn(): string => __('common.profil'))
+                    ->url(fn(): string => EditProfile::getUrl())
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

@@ -2,6 +2,7 @@
 
 return [
     'letsGo' => "J'y vais",
+    'profil' => "Profil",
     'myAccount' => 'Mon compte',
     'privateTraining' => 'Entrainements privés',
     'about' => 'A propos',
