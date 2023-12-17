@@ -13,6 +13,8 @@ return [
     'teachers' => 'Coachs',
     'specialities' => 'Spécialités',
     'speciality' => 'Spécialité',
+    'status' => 'Status',
+    'event' => 'Évènement',
     'categories' => 'Catégories',
     'category' => 'Catégorie',
     'user' => 'Utilisateur',
@@ -22,6 +24,8 @@ return [
     'deletedAt' => 'Supprimé le',
     'updatedAt' => 'Mis à jour le',
     'description' => 'Description',
+    'coach' => 'Coach',
+    'userComment' => 'Commentaire de l\'utilisateur',
     'book' => [
         'startHour' => 'Heure de début',
         'endHour' => 'Heure de fin',
