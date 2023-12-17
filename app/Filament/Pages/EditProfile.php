@@ -77,19 +77,18 @@ class EditProfile extends Page
     {
         return
             $form->schema([
-                    Section::make('Profile Information')
-                        ->aside()
-                        ->description('Update your account\'s profile information and email address.')
-                        ->schema([
-                            TextInput::make('name')
-                                ->required(),
-                            TextInput::make('email')
-                                ->email()
-                                ->required()
-                                ->unique(ignoreRecord: true),
-                        ]),
-                ]
-            )
+                Section::make('Profile Information')
+                    ->aside()
+                    ->description('Update your account\'s profile information and email address.')
+                    ->schema([
+                        TextInput::make('name')
+                            ->required(),
+                        TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->unique(ignoreRecord: true),
+                    ]),
+            ])
                 ->model($this->getUser())
                 ->statePath('profileData');
     }
@@ -115,8 +114,8 @@ class EditProfile extends Page
                         ->password()
                         ->rule(Password::default())
                         ->autocomplete('new-password')
-                        ->dehydrated(fn ($state): bool => filled($state))
-                        ->dehydrateStateUsing(fn ($state): string => Hash::make($state))
+                        ->dehydrated(fn($state): bool => filled($state))
+                        ->dehydrateStateUsing(fn($state): string => Hash::make($state))
                         ->live(debounce: 500)
                         ->same('passwordConfirmation'),
                     TextInput::make('passwordConfirmation')

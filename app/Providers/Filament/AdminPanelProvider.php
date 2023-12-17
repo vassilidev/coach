@@ -70,7 +70,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(
                 FilamentFullCalendarPlugin::make()
-                    ->selectable(!Str::endsWith(request()->url(), '/book'))
+                    ->selectable(!Str::endsWith(request()?->url(), '/book'))
                     ->config([
                         'headerToolbar'         => [
                             'left'   => 'prev,next,today',
@@ -110,7 +110,7 @@ class AdminPanelProvider extends PanelProvider
                         'initialView'           => 'timeGridWeek'
                     ])
                     ->plugins(['dayGrid', 'timeGrid', 'rrule', 'interaction', 'list'])
-                    ->editable(!Str::endsWith(request()->url(), '/book'))
+                    ->editable(!Str::endsWith(request()?->url(), '/book'))
             );
     }
 }

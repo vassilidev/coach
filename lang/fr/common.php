@@ -21,7 +21,7 @@ return [
     'createdAt' => 'Crée le',
     'deletedAt' => 'Supprimé le',
     'updatedAt' => 'Mis à jour le',
-
+    'description' => 'Description',
     'book' => [
         'startHour' => 'Heure de début',
         'endHour' => 'Heure de fin',
