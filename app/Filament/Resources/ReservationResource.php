@@ -119,7 +119,9 @@ class ReservationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SpecialityRelationManager::class,
+            RelationManagers\EventRelationManager::class,
+            RelationManagers\UserRelationManager::class,
         ];
     }
 
