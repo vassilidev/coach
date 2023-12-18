@@ -102,6 +102,10 @@ class ReservationResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->url(fn(Reservation $record) => (auth()->user()->hasRole('Super Admin'))
+                        ? ReservationResource::getUrl('edit', ['record' => $record])
+                        : ReservationResource::getUrl('custom-edit', ['record' => $record])),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -125,15 +129,23 @@ class ReservationResource extends Resource
             'index' => Pages\ListReservations::route('/'),
             'create' => Pages\CreateReservation::route('/create'),
             'edit' => Pages\EditReservation::route('/{record}/edit'),
+            'custom-edit' => Pages\CustomEditReservation::route('/{record}/custom-edit'),
         ];
     }
 
     public static function getEloquentQuery(): Builder
     {
+        if (auth()->user()->hasRole('Super Admin')) {
+            return parent::getEloquentQuery()
+                ->withoutGlobalScopes([
+                    SoftDeletingScope::class,
+                ]);
+        }
+
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])->where('user_id', auth()->user()->id);
     }
 
     public static function canCreate(): bool
@@ -144,6 +156,10 @@ class ReservationResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        if (auth()->user()->hasRole('Super Admin')) {
+            return static::getModel()::count();
+        }
+
+        return static::getModel()::where('user_id', auth()->user()->id)->count();
     }
 }

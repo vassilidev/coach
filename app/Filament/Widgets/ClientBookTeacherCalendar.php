@@ -93,7 +93,7 @@ class ClientBookTeacherCalendar extends FullCalendarWidget
                     ->required()
                     ->searchable(),
                 Textarea::make('comment')
-                    ->placeholder(__('common.book.messageForCoach'))
+                    ->placeholder(__('common.book.messageForCoachLabel'))
                     ->autosize()
                     ->columnSpanFull(),
             ])
