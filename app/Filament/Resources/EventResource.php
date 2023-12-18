@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
+use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -28,7 +29,7 @@ class EventResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('teacher_id')
                     ->label(__('common.coach'))
-                    ->relationship('teacher', 'id',)
+                    ->options(Teacher::with('user')->get()->pluck('user.name', 'id'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('start')
                     ->label(__('common.book.startHour'))
