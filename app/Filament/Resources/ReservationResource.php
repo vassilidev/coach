@@ -18,7 +18,7 @@ class ReservationResource extends Resource
 {
     protected static ?string $model = Reservation::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
     public static function form(Form $form): Form
     {
@@ -161,5 +161,15 @@ class ReservationResource extends Resource
         }
 
         return static::getModel()::where('user_id', auth()->user()->id)->count();
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('common.reservation');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('common.reservations');
     }
 }
