@@ -12,11 +12,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       (User::factory()->create([
-            'name'  => 'Admin',
-            'email' => 'admin@admin.com',
+        (User::factory()->create([
+            'name'              => 'Admin',
+            'email'             => 'admin@admin.com',
+            'email_verified_at' => now(),
+            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]))->assignRole('Super Admin');
 
-        User::factory(50)->create();
+        if (app()->isLocal()) {
+            User::factory(50)->create();
+        }
     }
 }

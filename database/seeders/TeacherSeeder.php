@@ -13,11 +13,13 @@ class TeacherSeeder extends Seeder
      */
     public function run(): void
     {
-        Teacher::factory()->create([
+        Teacher::create([
             'user_id'     => User::first()->id,
             'description' => 'Super coach',
         ]);
 
-        Teacher::factory(10)->create();
+        if (app()->isLocal()) {
+            Teacher::factory(10)->create();
+        }
     }
 }
