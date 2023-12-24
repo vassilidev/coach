@@ -12,11 +12,13 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()->create([
-            'name' => 'roller',
-            'slug' => 'roller',
+        Category::create([
+            'name' => 'hockey',
+            'slug' => 'hockey',
         ]);
 
-        Category::factory(4)->create();
+        if (app()->isLocal()) {
+            Category::factory(4)->create();
+        }
     }
 }

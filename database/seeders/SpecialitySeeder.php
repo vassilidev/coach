@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Speciality;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,14 @@ class SpecialitySeeder extends Seeder
      */
     public function run(): void
     {
-        Speciality::factory(15)->create();
+        Speciality::create([
+            'name'        => 'Vitesse',
+            'slug'        => 'vitesse',
+            'category_id' => Category::first()->id,
+        ]);
+
+        if (app()->isLocal()) {
+            Speciality::factory(15)->create();
+        }
     }
 }
