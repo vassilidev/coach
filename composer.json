@@ -16,15 +16,16 @@
         "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.9",
-        "laravel/telescope": "^4.16",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "3.0.2",
+        "opcodesio/log-viewer": "^3.1",
         "pxlrbt/filament-excel": "2.1",
         "saade/filament-fullcalendar": "3.0",
         "spatie/laravel-permission": "^5.11",
         "stripe/stripe-php": "^13.0"
     },
     "require-dev": {
+        "laravel/telescope": "^4.16",
         "barryvdh/laravel-debugbar": "^3.9",
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
@@ -78,7 +79,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

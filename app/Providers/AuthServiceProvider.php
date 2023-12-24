@@ -20,5 +20,15 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('teacher', static function (User $user) {
             return $user->isTeacher();
         });
+
+        Gate::define('viewLogViewer', function (?User $user) {
+            return $this->app->environment('local')
+                or $user?->hasRole('Super Admin');
+        });
+
+        Gate::define('viewPulse', function (?User $user) {
+            return $this->app->environment('local')
+                or $user?->hasRole('Super Admin');
+        });
     }
 }
