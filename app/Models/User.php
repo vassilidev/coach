@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Traits\Relations\MorphMany\MorphManyEvents;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +22,8 @@ class User extends Authenticatable implements FilamentUser
         HasFactory,
         Notifiable,
         HasRoles,
-        SoftDeletes;
+        SoftDeletes,
+        MorphManyEvents;
 
     protected $with = [
         'teacherProfile'
@@ -35,7 +38,6 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-
         'socialite_id',
         'login_provider',
         'socialite_token',
@@ -82,5 +84,20 @@ class User extends Authenticatable implements FilamentUser
     public function getAvatarAttribute(): string
     {
         return 'https://api.dicebear.com/7.x/adventurer/png?seed=' . urlencode($this->name);
+    }
+
+    public function checkouts(): HasMany
+    {
+        return $this->hasMany(Checkout::class);
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->teacherProfile()->exists();
     }
 }

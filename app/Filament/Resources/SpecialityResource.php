@@ -141,4 +141,9 @@ class SpecialityResource extends Resource
     {
         return __('common.specialities');
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

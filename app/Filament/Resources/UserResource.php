@@ -33,12 +33,15 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required(),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\DateTimePicker::make('email_verified_at')
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('login_provider')
                     ->readOnly()
-                    ->disabled(),
+                    ->disabled()
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('socialite_id')
                     ->readOnly()
+                    ->hiddenOn('create')
                     ->disabled(),
             ]);
     }
@@ -104,11 +107,6 @@ class UserResource extends Resource
             ]);
     }
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
-
     public static function getPages(): array
     {
         return [
@@ -133,5 +131,10 @@ class UserResource extends Resource
     public static function getPluralModelLabel(): string
     {
         return __('common.users');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

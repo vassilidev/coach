@@ -39,9 +39,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-xl-2 mt-5">
-                                <button class="btn btn-primary p-2 w-100">
+                                <a class="btn btn-primary p-2 w-100" href="{{route('filament.admin.resources.teachers.book', $teacher)}}">
                                     {{ __('front/home.book') }}
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
