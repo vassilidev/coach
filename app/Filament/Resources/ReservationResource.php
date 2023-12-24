@@ -59,10 +59,6 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('event.title')
                     ->label(__('common.event'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('comment')
-                    ->label(__('common.userComment'))
-                    ->limit(15)
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('event.start')
                     ->label(__('common.book.startHour'))
                     ->dateTime(config('datetime.format'))

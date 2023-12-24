@@ -22,7 +22,7 @@ class BookTeacher extends Page
     {
         $this->record = $this->resolveRecord($record);
 
-        $this->authorizeAccess();
+        $this->authorize('book', $this->record);
 
         $this->previousUrl = url()->previous();
     }

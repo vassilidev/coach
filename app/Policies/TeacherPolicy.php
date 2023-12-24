@@ -62,4 +62,9 @@ class TeacherPolicy
     {
         return false;
     }
+
+    public function book(User $user, Teacher $teacher): bool
+    {
+        return true;
+    }
 }
