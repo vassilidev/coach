@@ -23,7 +23,12 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('viewLogViewer', function (?User $user) {
             return $this->app->environment('local')
-                OR $user?->hasRole('Super Admin');
+                or $user?->hasRole('Super Admin');
+        });
+
+        Gate::define('viewPulse', function (?User $user) {
+            return $this->app->environment('local')
+                or $user?->hasRole('Super Admin');
         });
     }
 }
