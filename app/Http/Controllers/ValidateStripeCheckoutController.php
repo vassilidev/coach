@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Checkout\SaveInvoiceFromCheckout;
 use App\Enums\Stripe\Checkout\PaymentStatus;
 use App\Models\Checkout;
 use JsonException;
@@ -23,9 +24,11 @@ class ValidateStripeCheckoutController extends Controller
 
         $checkout->update([
             'payment_status' => $stripeCheckout->payment_status,
-            'status' => $stripeCheckout->status,
-            'checkout_data' => json_encode($stripeCheckout, JSON_THROW_ON_ERROR),
+            'status'         => $stripeCheckout->status,
+            'checkout_data'  => $stripeCheckout,
         ]);
+
+        app(SaveInvoiceFromCheckout::class)->execute($checkout);
 
         if ($checkout->redirect_url) {
             return redirect($checkout->redirect_url);

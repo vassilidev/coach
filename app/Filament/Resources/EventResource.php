@@ -131,9 +131,4 @@ class EventResource extends Resource
     {
         return __('common.events');
     }
-
-    public static function canCreate(): bool
-    {
-        return false;
-    }
 }

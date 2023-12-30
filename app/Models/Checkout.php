@@ -8,6 +8,7 @@ use App\Enums\Stripe\Checkout\Status;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Checkout extends Model
@@ -28,9 +29,9 @@ class Checkout extends Model
 
     protected $casts = [
         'payment_status' => PaymentStatus::class,
-        'status' => Status::class,
-        'amount' => Price::class,
-        'checkout_data' => 'array',
+        'status'         => Status::class,
+        'amount'         => Price::class,
+        'checkout_data'  => 'array',
     ];
 
     public function isPaid(): bool
@@ -56,5 +57,13 @@ class Checkout extends Model
     public function reservation(): HasOne
     {
         return $this->hasOne(Reservation::class, 'stripe_checkout_id');
+    }
+
+    /**
+     * @return HasMany<Invoice, Checkout>
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'stripe_checkout_id');
     }
 }

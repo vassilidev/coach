@@ -28,6 +28,8 @@ return [
     'updatedAt' => 'Mis à jour le',
     'description' => 'Description',
     'coach' => 'Coach',
+    'download' => 'Télécharger',
+    'see' => 'Voir',
     'userComment' => 'Commentaire de l\'utilisateur',
     'book' => [
         'startHour' => 'Heure de début',

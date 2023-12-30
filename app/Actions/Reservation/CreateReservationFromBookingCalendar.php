@@ -40,13 +40,15 @@ final class CreateReservationFromBookingCalendar
      */
     private function createCheckout(Event $event, int $specialityId): Checkout
     {
+        $user = Auth::user();
 
         $data = [
-            'title' => $event->title,
-            'start' => $event->start,
-            'end' => $event->end,
+            'title'           => $event->title,
+            'start'           => $event->start,
+            'end'             => $event->end,
             'speciality_name' => Speciality::firstWhere('id', $specialityId)->name,
-            'coach_name' => $event->teacher->user->name,
+            'coach_name'      => $event->teacher->user->name,
+            'customer_email'  => $user->email,
         ];
 
         return app(CreateStripeCheckoutFromCheckoutModel::class)
@@ -54,7 +56,7 @@ final class CreateReservationFromBookingCalendar
                 checkout: app(MakeCheckoutFromEvent::class)
                     ->execute(
                         event: $event,
-                        user: Auth::user(),
+                        user: $user,
                     ),
                 data: $data
             );
