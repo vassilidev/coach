@@ -99,7 +99,7 @@ class ClientBookTeacherCalendar extends FullCalendarWidget
             ])
             ->modalSubmitActionLabel(__('common.book.make'))
             ->modalHeading(__('common.book.details'))
-            ->successNotificationTitle(__('common.book.bookSucceeded'))
+            ->successNotificationTitle(null)
             ->failureNotificationTitle(__('common.book.bookFailed'))
             ->createAnother(false)
             ->using(function ($data) {

@@ -1,18 +1,18 @@
 <x-mail::message>
 # Confirmation de réservation
 
-Bonjour {{ $user_name }},
+Bonjour {{ $userName }},
 
-Nous sommes heureux de confirmer que votre réservation avec **{{ $teacher_name }}** a été effectuée avec succès.
+Nous sommes heureux de confirmer que votre réservation avec **{{ $teacherName }}** a été effectuée avec succès.
 
 # Détails de Votre réservation
 - **Date :** {{ $date }}
 - **Montant payé :** {{ $price / 100 }} €
-- **Professeur :** {{ $teacher_name }}
+- **Professeur :** {{ $teacherName }}
 - **Spécialité à développer :** {{ $speciality }}
 
-# Lien Google Meet pour votre Cours
-**<a href="{{ $link_google_meet }}">Cliquer ici pour rejoindre le Google Meet à la date de la réservation</a>**
+# Lien de l'appel vidéo
+**<a href="{{ $meetingLink }}">Cliquer ici pour rejoindre l'appel vidéo à la date de la réservation</a>**
 
 Nous vous encourageons à préparer toutes les questions ou les sujets que vous souhaitez aborder pendant votre session.
 

@@ -22,6 +22,7 @@ class Reservation extends Model
     protected $fillable = [
         'status',
         'comment',
+        'meeting_link',
     ];
 
     protected $casts = [

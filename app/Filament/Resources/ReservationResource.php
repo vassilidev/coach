@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationResource extends Resource
 {
@@ -47,7 +48,8 @@ class ReservationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(__('common.user'))
-                    ->searchable(isIndividual: true)
+                    ->searchable(condition: Auth::user()->isTeacher(), isIndividual: true)
+                    ->toggledHiddenByDefault(condition: !Auth::user()->isTeacher())
                     ->sortable(),
                 Tables\Columns\TextColumn::make('event.teacher.user.name')
                     ->label(__('common.coach'))
@@ -73,11 +75,8 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->label(__('common.status'))
                     ->badge()
-                    ->color(fn(Status $state): string => match ($state->value) {
-                        __('new') => 'warning',
-                        __('finished') => 'success',
-                        __('canceled') => 'danger',
-                    }),
+                    ->formatStateUsing(fn(Status $state) => $state->label())
+                    ->color(fn(Status $state) => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('common.createdAt'))
                     ->dateTime(config('datetime.format'))
@@ -124,9 +123,9 @@ class ReservationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListReservations::route('/'),
-            'create' => Pages\CreateReservation::route('/create'),
-            'edit' => Pages\EditReservation::route('/{record}/edit'),
+            'index'       => Pages\ListReservations::route('/'),
+            'create'      => Pages\CreateReservation::route('/create'),
+            'edit'        => Pages\EditReservation::route('/{record}/edit'),
             'custom-edit' => Pages\CustomEditReservation::route('/{record}/custom-edit'),
         ];
     }

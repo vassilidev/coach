@@ -1,16 +1,14 @@
 <x-mail::message>
-# Bonjour {{ $teacher_name }},
+# Bonjour {{ $teacherName }},
 
-Nous sommes ravis de vous informer que vous avez reçu une nouvelle réservation de la part de **{{ $user_name }}  ({{ $user_email }})**.
+Nous sommes ravis de vous informer que vous avez reçu une nouvelle réservation de la part de **{{ $userName }}  ({{ $userEmail }})**.
 
 # Détails de la réservation
 - **Date :** {{ $date }}
-- **Montant payé :** {{ $price / 100 }} €
-- **Spécialité à développer :** {{ $speciality }}
+- **Spécialité :** {{ $speciality }}
 
-
-# Lien Google Meet
-**<a href="{{ $link_google_meet }}">Cliquer ici pour rejoindre le Google Meet</a>**
+# Lien
+**<a href="{{ $meetingLink }}">Cliquer ici pour rejoindre l'appel vidéo à la date de la réservation</a>**
 
 Si vous avez des questions ou besoin d'assistance, n'hésitez pas à nous contacter à {{ config('mail.from.address') }}.
 

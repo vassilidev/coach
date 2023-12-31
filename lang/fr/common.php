@@ -49,4 +49,7 @@ return [
         'bookSucceeded' => 'La réservation à été effectué',
         'bookFailed' => 'La réservation à échoué',
     ],
+    'new' => 'Nouveau',
+    'canceled' => 'Annulé',
+    'finished' => 'Terminé'
 ];
