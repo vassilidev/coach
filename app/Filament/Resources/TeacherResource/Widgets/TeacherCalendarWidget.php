@@ -7,7 +7,9 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Saade\FilamentFullCalendar\Actions\{CreateAction, DeleteAction, EditAction};
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
@@ -24,8 +26,15 @@ class TeacherCalendarWidget extends FullCalendarWidget
 
             Grid::make()
                 ->schema([
-                    DateTimePicker::make('start'),
-                    DateTimePicker::make('end'),
+                    DateTimePicker::make('start')
+                        ->native(false)
+                        ->seconds(false),
+                    DateTimePicker::make('end')
+                        ->seconds(false)
+                        ->native(false)
+                        ->live()
+                        ->after('start')
+                        ->maxDate(fn(Get $get) => Carbon::parse($get('start'))->addHour())
                 ]),
         ];
     }

@@ -14,7 +14,7 @@ class EditTeacher extends Page
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
     protected static string $view = 'filament.pages.edit-teacher';
 
@@ -25,6 +25,14 @@ class EditTeacher extends Page
         abort_unless(auth()->user()->isTeacher(), 403);
 
         $this->form->fill(Auth::user()->teacherProfile->attributesToArray());
+    }
+
+    /**
+     * @return string
+     */
+    public static function getNavigationLabel(): string
+    {
+        return __('common.editTeacher');
     }
 
     public static function shouldRegisterNavigation(): bool

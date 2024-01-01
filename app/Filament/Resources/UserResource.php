@@ -21,6 +21,8 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $navigationGroup = 'Admin';
+
     protected static ?string $navigationIcon = 'bi-people-fill';
 
     public static function form(Form $form): Form

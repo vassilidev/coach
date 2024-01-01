@@ -31,6 +31,7 @@ class ClientBookTeacherCalendar extends FullCalendarWidget
         }
 
         return $this->teacher->events()
+            ->where('start', '>', now())
             ->where('start', '>=', $info['start'])
             ->where('end', '<=', $info['end'])
             ->get()

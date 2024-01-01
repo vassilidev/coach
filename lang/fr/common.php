@@ -51,5 +51,6 @@ return [
     ],
     'new' => 'Nouveau',
     'canceled' => 'Annulé',
-    'finished' => 'Terminé'
+    'finished' => 'Terminé',
+    'editTeacher' => 'Modification du profil Coach'
 ];

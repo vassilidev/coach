@@ -68,10 +68,12 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->homeUrl(fn() => route('front.home'))
             ->plugin(
                 FilamentFullCalendarPlugin::make()
                     ->selectable(!Str::endsWith(request()?->url(), '/book'))
                     ->config([
+                        'eventDurationEditable' => false,
                         'headerToolbar'         => [
                             'left'   => 'prev,next,today',
                             'center' => '',
