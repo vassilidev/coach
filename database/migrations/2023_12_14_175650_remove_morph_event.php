@@ -25,7 +25,9 @@ return new class extends Migration {
         });
 
         Schema::table('events', static function (Blueprint $table) {
-            $table->string('teacher_id')->nullable(false)->change();
+            $table->dropForeign(['teacher_id']);
+
+            $table->foreignIdFor(Teacher::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
 
         Schema::drop('eventables');
