@@ -2,15 +2,32 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Relations\MorphMany\MorphManyEvents;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    protected $table = 'users';
+
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasRoles,
+        SoftDeletes,
+        MorphManyEvents;
+
+    protected $with = [
+        'teacherProfile'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +38,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'socialite_id',
+        'login_provider',
+        'socialite_token',
+        'socialite_refresh_token',
     ];
 
     /**
@@ -42,4 +63,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $appends = [
+        'avatar',
+    ];
+
+    /**
+     * @return HasOne<Teacher, User>
+     */
+    public function teacherProfile(): HasOne
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
+
+    public function getAvatarAttribute(): string
+    {
+        return 'https://api.dicebear.com/7.x/adventurer/png?seed=' . urlencode($this->name);
+    }
+
+    public function checkouts(): HasMany
+    {
+        return $this->hasMany(Checkout::class);
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->teacherProfile()->exists();
+    }
 }
