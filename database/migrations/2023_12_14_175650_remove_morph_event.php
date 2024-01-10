@@ -1,10 +1,10 @@
 <?php
 
+use App\Models\Event;
 use App\Models\Teacher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Event;
 
 return new class extends Migration {
     /**
@@ -25,8 +25,19 @@ return new class extends Migration {
         });
 
         Schema::table('events', static function (Blueprint $table) {
+            $table->dropForeignIdFor(Teacher::class);
+
             $table->string('teacher_id')->nullable(false)->change();
         });
+
+        Schema::table('events', static function (Blueprint $table) {
+            $table->foreign('teacher_id')
+                ->references('id')
+                ->on('teachers')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
+
 
         Schema::drop('eventables');
 
